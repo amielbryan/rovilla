@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <main class="flex flex-col w-full flex-1 gap-6 p-4">
+        <main class="flex flex-col w-full flex-1 ">
                 @yield('payrollcontent')
         </main>
         

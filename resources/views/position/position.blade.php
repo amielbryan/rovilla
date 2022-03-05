@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="flex">
-        <div class="w-8/12 bg-white p-6 rounded-lg">
-            <h1 class="font-semibold text-2xl mb-4">Positions</h1>
-
+        <div class="w-full bg-white p-8">
             <a href="{{ route('position.create')}}"><button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-50 mb-4">Add Position</button></a>            
             <h2 class="font-semibold text-xl bg-blue-500 text-white text-center p-2 ">Position Available</h2>
             <table class="w-full table-auto table-auto border border-blue-500" id="tabledit">

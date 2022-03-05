@@ -2,69 +2,50 @@
 
 @section('content')
     <div class="flex">
-        <div class="w-8/12 bg-white p-6 rounded-lg">
-            <h1 class="font-semibold text-2xl mb-4">Personnel</h1>
-            <form action="{{ route('personnel') }}" method="post">
-                @csrf
-                <div class="mb-4">
-                    <label for="name" class="sr-only">Name</label>
-                    <input type="text" name="name" id="name" placeholder="Personnel Full Name" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('name') border-red-500 @enderror" value="{{ old('name') }}">
-                    @error('name')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{ $message }}
-                        </div>
-                    @enderror                
-                </div>
-                
-                <div class="mb-4">
-                    <label for="position" class="sr-only">Position Name</label>
-                    <select name="position" id="position" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('position') border-red-500 @enderror"  value="{{ old('position') }}">
-                    @foreach($position as $row)
-                    <option value="{{$row->position_name}}">{{$row->position_name}}</option>
+        <div class="w-full bg-white p-8">
+            <a href="{{ route('personnel.create')}}"><button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-50 mb-4">Add Personnel</button></a>
+
+            <h2 class="font-semibold text-xl bg-blue-500 text-white text-center p-2 ">Personnel</h2>
+            <table class="w-full table-auto table-auto border border-blue-500" id="tabledit">
+                <thead class="rounded">
+                    <tr>
+                        <td class="border border-blue-500 bg-blue-500 text-white text-center text-lg font-semibold">ID</td>
+                        <td class="border border-blue-500 bg-blue-500 text-white text-center text-lg font-semibold">Personnel Name</td>
+                        <td class="border border-blue-500 bg-blue-500 text-white text-center text-lg font-semibold">Daily Rate</td>
+                        <td class="border border-blue-500 bg-blue-500 text-white text-center text-lg font-semibold">Status</td>
+                        <td class="border border-blue-500 bg-blue-500 text-white text-center text-lg font-semibold">Action Perform</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($personnel as $row)
+                    <tr>
+                        <td class="border border-blue-500 w-12 text-center">
+                            {{ $row->id }}
+                        </td>
+                        <td class="border border-blue-500 text-center">
+                             {{ $row->name }}
+                        </td > 
+                        <td class="border border-blue-500 text-center">
+                             {{ $row->rate }}
+                        </td > 
+                        <td class="border border-blue-500 text-center">
+                             {{ $row->status }}
+                        </td > 
+                        <td class="border border-blue-500 text-center">
+                            <a href="{{ route('editpersonnel', $row->id) }}"><button class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button></a>
+                            <form action="{{ route('personnel.destroy', $row->id) }}" method="post" class="inline">
+                                @method('delete')
+                                @csrf
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded ">  Delete</button>
+                            </form>
+                        </td>                   
+                    </tr>
                     @endforeach
-                    </select>
-                    @error('position')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{ $message }}
-                        </div>
-                    @enderror                
-                </div>
-                <div class="mb-4">
-                    <label for="rate_type" class="sr-only">Rate Type</label>                    
-                    <select type="text" name="rate_type" id="rate_type"  class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('rate_type') border-red-500 @enderror" value="{{ old('rate_type') }}">
-                    <option value="daily">Daily Rate</option>
-                    <option value="fixed">Fixed</option>
-                    </select>
-                    @error('rate_type')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{ $message }}
-                        </div>
-                    @enderror                
-                </div>
-                <div class="mb-4">
-                    <label for="rate" class="sr-only">Rate</label>
-                    <input type="number" name="rate" id="rate"  placeholder="Enter your rate" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('rate') border-red-500 @enderror" value="{{ old('rate') }}">
-                    @error('rate')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{ $message }}
-                        </div>
-                    @enderror                
-                </div>
-                <div class="mb-4">
-                    <label for="status" class="sr-only">Status</label>
-                    <select type="text" name="status" id="status"  class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('status') border-red-500 @enderror" value="{{ old('status') }}">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                    <option value="awol">AWOL</option>
-                    </select>
-                    @error('status')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{ $message }}
-                        </div>
-                    @enderror                
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full mb-4">Add Personnel</button>
-            </form>
+                </tbody>
+            </table>
+
+            {{ $personnel->links() }}   
+
 
 
         </div>

@@ -10,8 +10,13 @@ use App\Http\Controllers\PersonnelController;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
 
+Route::resource("/personnel", PersonnelController::class);
 Route::get('/personnel', [PersonnelController::class, 'index'])->name('personnel');
-Route::post('/personnel', [PersonnelController::class, 'store']);
+Route::post('/personnel/addpersonnel', [PersonnelController::class, 'create'])->name('addpersonnel');
+Route::get('/personnel/addpersonnel', [PersonnelController::class, 'store']);
+Route::get('/personnel/editpersonnel/{id}', [PersonnelController::class, 'edit'])->name('editpersonnel');
+Route::post('/personnel/editpersonnel/{id}', [PersonnelController::class, 'update']);
+
 
 Route::resource("/position", PositionController::class);
 Route::get('/position', [PositionController::class, 'index'])->name('position');

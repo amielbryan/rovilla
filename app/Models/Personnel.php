@@ -12,8 +12,9 @@ class Personnel extends Model
     protected $fillable = [
         'name',
         'position',
-        'rate_type',
         'rate',
         'status',
+        'dtr_id',
+        'site_id',
     ];
 }

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string("name");
             $table->string("position");
-            $table->string("rate_type");
             $table->string("rate");
             $table->string("status");
+            $table->string("dtr_id");
+            $table->string("site_id");
         });
     }
 
